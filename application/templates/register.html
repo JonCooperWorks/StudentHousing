@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% from "includes/_formhelpers.html" import render_form %}
+
+{% block title %}
+- Register
+{% endblock %}
+
+
+{% block content %}
+	<div class="span5">
+		<h1>Additional Information</h1>
+		<p>
+		Thanks for signing in with your Google account. We'll just need a bit more information from you, to make it easier for prospective
+		renters to contact you through the website.  All fields below are required.
+		</p>
+		<form method="POST" action="{{ url_for('authenticate') }}">
+		  <dl>
+			{{ render_form(form) }}
+		  </dl>
+		  <p><input type=submit value="Register">
+		</form>
+	</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero-unit">
+	<h1>Student Housing Finder</h1>
+	<p>
+		Stop scouring newspapers and bulletin boards! Stop spending hours waiting on lists to be published by universities! 
+		Stop working hard; work smart with Student Housing Finder! No sign up required, just click the button below and see which house
+		can become your home.
+		
+	</p>
+	<p><a class="btn btn-primary btn-large" href="{{ url_for('all_listings') }}">Start now &raquo;</a></p>
+</div>
+
+<!-- Example row of columns -->
+<div class="row">
+	<div class="span4">
+		<h2>About</h2>
+		<p>
+			This website is a pet project by Jonathan Cooper, developed in Flask, a python microframework and
+			running on Google App Engine. To read more about the project, and to see some code samples,
+			<a href="{{ url_for('about') }}">click here</a>
+		</p>
+	</div>
+	<div class="span4">
+		<h2>Contact Me</h2>
+		<p>
+			Want to ask me questions about this website? Need help with something programming related? Want to work with me on a project?
+			Just want to say hi? Feel free to <a href="{{ url_for('contact_me') }}">contact me</a>! 
+			<p>
+				<strong>Note:</strong> You will have to sign in to your Google account to use the contact feature. 
+				This is so the email can be sent from your email address without exposing your email address to this service.
+			</p>
+		</p>
+	</div>
+	<div class="span4">
+		<h2>Try it</h2>
+		<p>
+			Want to see how the website works? Just go ahead and try it! <a href="{{ url_for('authenticate') }}">Register or Log in</a>, and get started!
+			Just sign in using your Google account and play with the features. If you find a bug, please <a href="{{ url_for('contact_me') }}">contact me</a>
+			with a description of what you were doing when the bug occured.
+		</p>
+	</div>
+</div>
+{% endblock content %}

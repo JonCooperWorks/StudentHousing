@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% from "includes/_formhelpers.html" import render_form %}
+
+{% block title %}
+- Update Contact Information
+{% endblock %}
+
+{% block content %}
+	<div class="span5">
+		<h1>Update your contact information</h1>
+		<form method="POST" action="{{ url_for('update_contact') }}">
+		  <dl>
+		  {{ render_form(form) }}
+		  </dl>
+		  <p><input type=submit value="Update">
+		</form>
+	</div>
+{% endblock %}

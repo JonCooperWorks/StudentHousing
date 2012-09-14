@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% set landlord = listing.landlord %}
+
+{% block title %}
+- {{ listing.title }}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="span12">
+		<h1>{{ listing.title }}</h1>
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Address</th>
+					<th>City</th>
+					<th>Parish</th>
+					<th>Description</th>
+					<th>Occupancy</th>
+					<th>Monthly Rent</th>
+					<th>Landlord</th>
+					<th>Landlord Phone Number</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% if listing %}
+				<tr>
+					<td>{{ listing.address }}</td>
+					<td>{{ listing.city }}</td>
+					<td>{{ listing.parish|int2parish }}</td>
+					<td>{{ listing.description }}</td>
+					<td>{{ listing.occupancy|int2occupancy }}</td>
+					<td>${{ "%.2f" % listing.rent }}</td>
+					<td><a href="{{ url_for('contact_landlord', id = landlord.key().id()) }}">{{ landlord.name }}</a></td>
+					<td>{{ landlord.phone_number|tophonenum }}</td>
+				</tr>
+				{% else %}
+				<tr><td colspan="8">No listing by that ID exists</td></tr>
+				{% endif %}
+			</tbody>
+		</table>
+		<p>
+		<strong>Note:</strong> You will have to sign into your Google account in order to contact a landlord through this website.
+		</p>
+	</div>	
+</div>
+
+{% endblock %}

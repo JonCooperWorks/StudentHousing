@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% from "includes/_formhelpers.html" import render_form %}
+
+{% block content %}
+<div class="span6">
+<h1>Contact me</h1>
+<p>
+	Use the form below to send me an email. Contact me if you want to collaborate on a project, 
+	need help with some code, or just want to say hi. Be sure to leave your name.
+</p>
+<p>
+	<form action="{{ url_for('contact_me') }}" method="POST">
+		{{ render_form(form) }}
+		<p><input type=submit value="Contact Me"></p>
+	</form>
+</p>
+</div>
+{% endblock content %}
