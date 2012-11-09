@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}
+- Your Listings
+{% endblock %}
+
+
+{% block style_block %}
+<style type="text/css">
+	tr.green { background: #def0d8 }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="span10">
+	<h1>Manage Your Listings</h1>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Address</th>
+				<th>Date Added</th>
+				<th>Occupied</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for listing in listings %}
+			{% if listing.occupied %}
+			<tr class="green">
+			{% else %}
+			<tr>
+			{% endif %}
+				<td><a href="{{ url_for('manage_listing', id=listing.key().id()) }}">{{ listing.title }}</a></td>
+				<td>{{ listing.address }}</td>
+				<td>{{ listing.timestamp.strftime('%b %d, %Y') }}</td>
+				<td><strong>{{ listing.occupied|bv2yn }}</strong></td>
+			</tr>
+			{% else %}
+			<tr>
+				<tr><td colspan="8">No listings found</td></tr>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}

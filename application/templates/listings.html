@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+- Listings
+{% endblock %}
+
+
+{% block content %}
+<div class="span10">
+	{% if parish %}
+	<h1>All listings for {{ parish|int2parish }}</h1>
+	{% else %}
+	<h1>All listings</h1>
+	{% endif %}
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Landlord</th>
+				<th>Address</th>
+				<th>City</th>
+				<th>Parish</th>
+				<th>Occupancy</th>
+				<th>Monthly Rent</th>
+				<th>Available Since</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for listing in listings %}
+			<tr>
+				{% set landlord = listing.landlord %}
+				<td><a href="{{ url_for('get_listing', id=listing.key().id()) }}">{{ listing.title }}</a></td>
+				<td>{{ landlord.name }}</td>
+				<td>{{ listing.address }}</td>
+				<td>{{ listing.city }}</td>
+				<td>{{ listing.parish|int2parish }}</td>
+				<td>{{ listing.occupancy|int2occupancy }}</td>
+				<td>${{ "%.2f" % listing.rent }}</td>
+				<td>{{ listing.timestamp.strftime('%b %d, %Y') }}</td>
+			</tr>
+			{% else %}
+			<tr>
+				<tr><td colspan="8">No listings found</td></tr>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}
