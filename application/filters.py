@@ -34,3 +34,30 @@ def to_phone_number(eval_ctx, value):
         return Markup(phone_number)
     return phone_number
 
+<<<<<<< HEAD
+=======
+#List of parishes for form
+parishes = [
+    (1, "Kingston"),
+    (2, "St. Andrew"),
+    (3, "St. Catherine"),
+    (4, "Clarendon"),
+    (5, "Manchester"),
+    (6, "St. Elizabeth"),
+    (7, "Westmoreland"),
+    (8, "Hanover"),
+    (9, "St. James"),
+    (10, "Trelawny"),
+    (11, "St. Ann"),
+    (12, "St. Mary"),
+    (13, "Portland"),
+    (14, "St. Thomas")
+]
+
+occupancies = [
+    (1, 'Single'), 
+    (2, 'Double'), 
+    (3, 'Triple'), 
+    (4, 'Multiple')
+]
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6

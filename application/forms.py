@@ -1,5 +1,6 @@
 from flaskext import wtf
 from flaskext.wtf import validators
+<<<<<<< HEAD
 
 #List of parishes for form
 parishes = [
@@ -33,6 +34,9 @@ ratings = [
     (4, '4'),
     (5, '5')
 ]
+=======
+from filters import parishes, occupancies
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6
 
 '''Validators'''
 def is_phone_number(form, field):
@@ -59,12 +63,17 @@ class RegistrationForm(wtf.Form):
     phone_number = wtf.TextField('Phone Number', validators=[validators.Required(),is_phone_number])
     email_address = wtf.TextField('Email Address', validators=[validators.Required(),validators.Email()])
     
+<<<<<<< HEAD
 class LandlordForm(wtf.Form):
+=======
+class ContactForm(wtf.Form):
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6
     name = wtf.TextField('Name', validators=[validators.Required(), is_valid_header])
     subject = wtf.TextField('Subject',validators=[validators.Required(), is_valid_header])
     body = wtf.TextAreaField('Message Body',validators=[validators.Required()], widget=wtf.TextArea())
     
 class EditListingForm(ListingForm):
+<<<<<<< HEAD
     occupied = wtf.BooleanField('Occupied')
 
 class RenterForm(wtf.Form):
@@ -76,3 +85,6 @@ class ReviewForm(wtf.Form):
     title = wtf.TextField('Title', validators=[validators.Required()])
     body = wtf.TextAreaField('Review', validators=[validators.Review()])
     rating = wtf.SelectField('Rating', choices=ratings, coerce=int)
+=======
+    occupied = wtf.BooleanField('Occupied')
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6

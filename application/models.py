@@ -1,6 +1,10 @@
 from google.appengine.ext import db
 
+<<<<<<< HEAD
 class Landlord(db.Model):
+=======
+class Contact(db.Model):
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6
     name = db.StringProperty()
     phone_number = db.StringProperty()
     email_address = db.EmailProperty()
@@ -9,7 +13,11 @@ class Landlord(db.Model):
     
     @staticmethod
     def get_by_user(user):
+<<<<<<< HEAD
         query = db.GqlQuery("SELECT * FROM Landlord WHERE user = :1", user)
+=======
+        query = db.GqlQuery("SELECT * FROM Contact WHERE user = :1", user)
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6
         return query.get()
 
 class Listing(db.Model):
@@ -22,8 +30,12 @@ class Listing(db.Model):
     rent = db.FloatProperty()
     occupied = db.BooleanProperty()
     timestamp = db.DateTimeProperty(auto_now_add=True)
+<<<<<<< HEAD
     landlord = db.ReferenceProperty(Landlord)
     renter = db.ReferenceProperty(Renter)
+=======
+    landlord = db.ReferenceProperty(Contact)
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6
     user = db.UserProperty()
     
     @staticmethod
@@ -37,14 +49,22 @@ class Listing(db.Model):
         db.delete(listing)
     
 def get_username(user):
+<<<<<<< HEAD
     query = db.GqlQuery("SELECT * FROM Landlord WHERE user= :1", user)
     landlord = query.get()
     if landlord is not None:
         return landlord.name
+=======
+    query = db.GqlQuery("SELECT * FROM Contact WHERE user= :1", user)
+    contact = query.get()
+    if contact is not None:
+        return contact.name
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6
     else:
         return "Anonymous"
 
 def is_account(user):
+<<<<<<< HEAD
     account = db.GqlQuery("SELECT name FROM Landlord WHERE user= :1", user).get()
     return account is not None
 
@@ -62,3 +82,7 @@ class Renter(db.Model):
     email_address = db.StringProperty()
     created_on = db.DateTimeProperty()
     user = db.UserProperty()
+=======
+    account = db.GqlQuery("SELECT name FROM Contact WHERE user= :1", user).get()
+    return account is not None
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6

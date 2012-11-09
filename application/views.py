@@ -9,10 +9,17 @@ from flask import render_template, flash, url_for, redirect, request, session
 
 from settings import EMAIL_ADDR
 
+<<<<<<< HEAD
 from models import Listing, Landlord
 from models import is_account, get_username
 
 from forms import ListingForm, RegistrationForm, LandlordForm, EditListingForm
+=======
+from models import Listing, Contact
+from models import is_account, get_username
+
+from forms import ListingForm, RegistrationForm, ContactForm, EditListingForm
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6
 
 from decorators import login_required, admin_required, account_required
 
@@ -22,6 +29,7 @@ def home():
     return render_template('home.html')
 
 @login_required    
+<<<<<<< HEAD
 def landlord():
     form = LandlordForm()
     if form.validate_on_submit():
@@ -32,6 +40,18 @@ def landlord():
             flash(u'Sending Failed', 'error')
             return redirect(url_for('landlord_me'))
     return render_template('landlord_me.html', form=form)
+=======
+def contact():
+    form = ContactForm()
+    if form.validate_on_submit():
+        if send_email(form, 'j.cooper@outlook.com', 'Jonathan Cooper'):
+            flash(u'Email sent!', 'success')
+            return redirect(url_for('contact_me'))
+        else:
+            flash(u'Sending Failed', 'error')
+            return redirect(url_for('contact_me'))
+    return render_template('contact_me.html', form=form)
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6
     
 def about():
     return render_template('about.html')
@@ -48,14 +68,22 @@ def authenticate():
         return redirect(url_for('profile'))
     form = RegistrationForm()
     if form.validate_on_submit():
+<<<<<<< HEAD
         landlord = Landlord(
+=======
+        contact = Contact(
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6
             name = form.name.data,
             email_address = form.email_address.data,
             phone_number = form.phone_number.data,
             user = users.get_current_user()
         )
         try:
+<<<<<<< HEAD
             landlord.put()
+=======
+            contact.put()
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6
             flash(u'Account %s registered successfully'% form.name.data, 'success')
         except CapabilityDisabledError:
             flash(u'The database is currently in read-only mode. We apologize for the inconvenience. Please try again later', 'info')
@@ -127,7 +155,11 @@ def delete_listing(id):
 def profile():
     '''Landlord management dashboard.'''
     user = users.get_current_user()
+<<<<<<< HEAD
     landlord = Landlord.get_by_user(user)
+=======
+    landlord = Contact.get_by_user(user)
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6
     #Generate statistics for the landlord's listings
     listings = Listing.gql('WHERE user = :1', user).count()
     available = Listing.gql('WHERE user = :1 AND occupied = False', user).count()
@@ -136,9 +168,15 @@ def profile():
     return render_template('dashboard.html', landlord=landlord, stats=stats)
     
 @account_required
+<<<<<<< HEAD
 def update_landlord():
     '''Allow user to update their landlord information'''
     landlord = Landlord.get_by_user(users.get_current_user())
+=======
+def update_contact():
+    '''Allow user to update their contact information'''
+    landlord = Contact.get_by_user(users.get_current_user())
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6
     form = RegistrationForm(obj=landlord)
     if form.validate_on_submit():
         landlord.name = form.name.data
@@ -149,10 +187,17 @@ def update_landlord():
             flash(u'Information updated successfully', 'success')
         except TransactionFailedError:
             logging.error(traceback.extract_stack())
+<<<<<<< HEAD
             flash(u'Error saving landlord details. Try again later', 'error')
         finally:
             return redirect(url_for('profile'))
     return render_template('edit_landlord.html',landlord=landlord,form=form)
+=======
+            flash(u'Error saving contact details. Try again later', 'error')
+        finally:
+            return redirect(url_for('profile'))
+    return render_template('edit_contact.html',landlord=landlord,form=form)
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6
 
 @account_required
 def logout():
@@ -183,6 +228,7 @@ def get_listing(id=None):
         return render_template('listing.html', listing=listing)
 
 @login_required
+<<<<<<< HEAD
 def landlord_landlord(id=None):
     '''Allows a user to landlord a landlord via email.'''
     landlord = Landlord.get_by_id(id)
@@ -190,6 +236,15 @@ def landlord_landlord(id=None):
         flash(u'You must select a landlord to landlord','error')
         return redirect(url_for('all_listings'))
     form = LandlordForm()
+=======
+def contact_landlord(id=None):
+    '''Allows a user to contact a landlord via email.'''
+    landlord = Contact.get_by_id(id)
+    if landlord is None:
+        flash(u'You must select a landlord to contact','error')
+        return redirect(url_for('all_listings'))
+    form = ContactForm()
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6
     if form.validate_on_submit():
         if send_email(form, landlord.email_address, landlord.name):
             flash(u'Email sent!', 'success')
@@ -199,7 +254,11 @@ def landlord_landlord(id=None):
             return redirect(request.url)
         
     else:
+<<<<<<< HEAD
         return render_template('landlord_landlord.html', form=form, landlord=landlord)
+=======
+        return render_template('contact_landlord.html', form=form, landlord=landlord)
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6
         
 def warmup():
     '''App Engine warmup handler
@@ -218,7 +277,11 @@ def persist_listing(form, listing):
     listing.description = form.description.data
     listing.occupancy = form.occupancy.data
     listing.rent = float(form.rent.data)
+<<<<<<< HEAD
     listing.landlord = Landlord.get_by_user(users.get_current_user())
+=======
+    listing.landlord = Contact.get_by_user(users.get_current_user())
+>>>>>>> d76fc545aab7b1e1556c2efea62c18d4a20978f6
     listing.user = users.get_current_user()
     if isinstance(form, EditListingForm):
         listing.occupied = form.occupied.data
